@@ -33,10 +33,36 @@
             bindings = <&kp>, <&kp>;
 
             #binding-cells = <2>;
-            tapping-term-ms = <280>;
+            tapping-term-ms = <330>;
             flavor = "tap-preferred";
             require-prior-idle-ms = <175>;
             quick-tap-ms = <175>;
+        };
+    };
+
+    macros {
+        term_copy: term_copy {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_press>, <&kp LC(LS(C))>, <&macro_release>;
+
+            label = "TERM_COPY";
+        };
+
+        term_paste: term_paste {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_press>, <&kp LC(LS(V))>, <&macro_release>;
+
+            label = "TERM_PASTE";
+        };
+
+        command_bar: command_bar {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_press>, <&kp LC(RS(P))>, <&macro_release>;
+
+            label = "COMMAND_BAR";
         };
     };
 
@@ -71,8 +97,8 @@
 &kp F1  &kp F2         &kp F3          &kp F4            &kp F5                &kp F6     &tog 1                                      &mo 3   &kp F7     &kp F8                 &kp F9             &kp F10          &kp F11           &kp F12
 &trans  &trans         &trans          &trans            &trans                &trans     &none                                       &none   &trans     &trans                 &trans             &trans           &trans            &trans
 &trans  &kp LESS_THAN  &kp LEFT_BRACE  &kp LEFT_BRACKET  &kp LEFT_PARENTHESIS  &kp TILDE  &none   &trans  &trans      &trans  &trans  &none   &kp MINUS  &kp RIGHT_PARENTHESIS  &kp RIGHT_BRACKET  &kp RIGHT_BRACE  &kp GREATER_THAN  &trans
-&trans  &trans         &trans          &trans            &trans                &trans                     &trans      &trans                  &trans     &trans                 &trans             &trans           &trans            &trans
-&trans  &trans         &trans          &trans            &trans                           &trans  &trans  &trans      &trans  &trans  &trans             &trans                 &trans             &trans           &trans            &trans
+&trans  &trans         &trans          &term_copy        &term_paste           &trans                     &trans      &trans                  &trans     &trans                 &trans             &trans           &trans            &trans
+&trans  &trans         &command_bar    &trans            &trans                           &trans  &trans  &trans      &trans  &trans  &trans             &trans                 &trans             &trans           &trans            &trans
             >;
         };
 
